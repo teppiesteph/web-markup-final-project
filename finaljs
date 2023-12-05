@@ -1,0 +1,49 @@
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('generateButton').addEventListener('click', generateMealPlan);
+    document.getElementById('printButton').addEventListener('click', printMealPlan);
+});
+
+function generateMealPlan() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const goal = document.getElementById('goal').value;
+    const breakfast = document.getElementById('breakfast').value;
+    const snack1 = document.getElementById('snack1').value;
+    const lunch = document.getElementById('lunch').value;
+    const snack2 = document.getElementById('snack2').value;
+    const dinner = document.getElementById('dinner').value;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please include your valid email address!');
+        return;
+    }
+
+  
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    let mealPlanContent = `
+        <h2>Weekly Meal Plan for ${name}</h2>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Goal for the Week:</strong> ${goal}</p>
+        <h3>Meal Plan:</h3>
+    `;
+
+    daysOfWeek.forEach(day => {
+        mealPlanContent += `
+            <p>${day} - Breakfast: ${breakfast}</p>
+            <p>${day} - Snack: ${snack1}</p>
+            <p>${day} - Lunch: ${lunch}</p>
+            <p>${day} - Snack: ${snack2}</p>
+            <p>${day} - Dinner: ${dinner}</p>
+            <br>
+        `;
+    });
+    const newWindow = window.open('');
+    newWindow.document.write(mealPlanContent);
+    newWindow.document.body.style.backgroundColor = 'lightpink'; 
+    newWindow.document.close();
+    newWindow.focus();
+}
+
+function printMealPlan() {
+    // a bit confused on this part
+}
